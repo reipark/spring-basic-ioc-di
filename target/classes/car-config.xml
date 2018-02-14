@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="hyundai" class="com.example.ioc3.HyundaiMaker"></bean>
+	<bean id="kia" class="com.example.ioc3.KiaMaker"></bean>
+	
+	<bean id="manager" class="com.example.ioc3.OrderManager" init-method="init">
+		<!-- 필드변수 maker 에 직접 넣는 것이 아니라 setMaker 세터메소드를 사용 -->
+		<property name="maker" ref="kia"></property>
+	</bean>
+	
+	<!-- p 태그 사용
+	<bean id="manager" class="com.example.ioc3.OrderManager" p:maker-ref="kia"></bean>
+	-->
+	
+	<!-- c 태그 사용 : OrderManager 에 CarMaker 를 인자로 받는 생성자가 있어야 함 
+	<bean id="manager" class="com.example.ioc3.OrderManager" c:maker-ref="kia"></bean>
+	-->
+
+</beans>
